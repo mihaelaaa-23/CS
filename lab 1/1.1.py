@@ -1,11 +1,9 @@
 def caesar_cipher(text, key, mode):
-    alphabet = [chr(i) for i in range(ord('A'), ord('Z')+1)]
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     n = len(alphabet)
 
-    # transform text: uppercase + remove spaces
     text = text.upper().replace(" ", "")
 
-    # check for invalid characters
     for ch in text:
         if ch not in alphabet:
             raise ValueError("The text must contain only letters A–Z or a–z.")
