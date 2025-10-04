@@ -1,11 +1,5 @@
-def letter_to_index(ch):
-    return ord(ch) - ord('A')
-
-def index_to_letter(i):
-    return chr((i % 26) + ord('A'))
-
 def caesar_with_two_keys(text, key1, key2, mode):
-    alphabet = [chr(i) for i in range(ord('A'), ord('Z')+1)]
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     n = len(alphabet)
 
     # validate key1
@@ -25,22 +19,22 @@ def caesar_with_two_keys(text, key1, key2, mode):
 
     result = ""
     for i, ch in enumerate(text):
-        index = letter_to_index(ch)
+        index = alphabet.index(ch)
 
         if mode == "encrypt":
             # first Caesar with key1
             index = (index + key1) % n
             # then Vigenere with key2
-            k2_shift = letter_to_index(key2[i % len(key2)])
+            k2_shift = alphabet.index(key2[i % len(key2)])
             index = (index + k2_shift) % n
         else:  # decrypt
             # undo Vigenere first
-            k2_shift = letter_to_index(key2[i % len(key2)])
+            k2_shift = alphabet.index(key2[i % len(key2)])
             index = (index - k2_shift) % n
             # then undo Caesar
             index = (index - key1) % n
 
-        result += index_to_letter(index)
+        result += alphabet[index]
 
     return result
 
